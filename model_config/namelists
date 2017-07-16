@@ -1,0 +1,33 @@
+
+ &fms_io_nml
+     threading_write = 'multi'
+     fileset_write = 'multi' /
+
+ &fms_nml
+     clock_grain = "LOOP",
+     domains_stack_size = 900000
+     print_memory_usage = .true.  /
+
+ &fv_core_nml
+     layout   = 2,2
+     npx      = 49,
+     npy      = 49,
+     npz      = 20,
+     npz_rst  = 20,
+     hord_tr  = -8,
+     kord_tr  = 4,
+     uniform_vert_spacing = .true.,
+     ntiles   = 6,
+     do_Held_Suarez = .false.
+     adiabatic = .true.
+     print_freq = -1,
+     grid_type = 0
+     warm_start = .false.
+     io_layout = 2,2 /
+
+ &fv_grid_nml
+     grid_name = 'Gnomonic' /
+
+ &test_case_nml
+     test_case = 13
+     alpha = 0.00 /
