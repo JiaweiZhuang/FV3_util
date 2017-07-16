@@ -1,0 +1,69 @@
+#!/bin/csh -f
+#Minimal runscript for atmospheric dynamical cores
+set echo
+#--------------------------------------------------------------------------------------------------------
+# define variables
+set platform  = Pleiades                                  # A unique identifier for your platform
+set npes      = 6                                        # number of processors
+set template  = $cwd/../bin/mkmf.template.$platform   # path to template for your platform
+set mkmf      = $cwd/../bin/mkmf                      # path to executable mkmf
+set sourcedir = $cwd/../src                           # path to directory containing model source code
+set mppnccombine = $cwd/../bin/mppnccombine.$platform # path to executable mppnccombine
+setenv PPDIR  $cwd/../postprocessing     # path to directory containing postprocessing source code and grid data for fregrid_parallel
+#--------------------------------------------------------------------------------------------------------
+
+set execdir = $cwd/exec.$platform       # where code is compiled and executable is created
+if ($#argv != 1 ) then
+  echo "Need one argument (run directory name)"
+  exit 1
+endif
+set runName  = $argv[1]
+
+# remember to check this!! where model is run and model output is produced
+set workdir = $HOME/FV3/rundirs/$runName
+
+alias cc icc
+
+set pathnames = $cwd/path_names           # path to file containing list of source paths
+set namelist  = $cwd/namelists            # path to namelist file
+set diagtable = $cwd/diag_table           # path to diagnositics table
+set fieldtable = $cwd/field_table         # path to field table (specifies tracers)
+set runscript = $cwd/run_FV3              # path run script 
+set bashrc = $cwd/GCHP.Pleiades.bashrc
+#--------------------------------------------------------------------------------------------------------
+# compile mppnccombine.c, will be used only if $npes > 1
+if ( ! -f $mppnccombine ) then
+  icc -O -o $mppnccombine -I$NETCDF_HOME/include -L$NETCDF_HOME/lib $PPDIR/mppnccombine.c -lnetcdf -lnetcdff
+endif
+#--------------------------------------------------------------------------------------------------------
+# setup directory structure
+if ( ! -d $execdir ) mkdir $execdir
+if ( -e $workdir ) then
+  echo "ERROR: Existing workdir may contaminate run.  Move or remove $workdir and try again."
+  exit 1
+endif
+mkdir $workdir $workdir/INPUT $workdir/RESTART
+#--------------------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------------
+# compile the model code and create executable
+cd $execdir
+$mkmf -p fms.x -t $template -c "-Duse_libMPI -Duse_netCDF -DSPMD" -a $sourcedir $pathnames $sourcedir/shared/mpp/include $sourcedir/shared/include
+make -f Makefile
+if ( $status != 0 ) then
+  echo "ERROR: make failed"
+  exit 1
+endif
+cd $workdir
+#--------------------------------------------------------------------------------------------------------
+# set run length and time step, get input data and executable
+cat > input.nml <<EOF
+ &main_nml
+     days   = 8,
+     dt_atmos = 1800 /
+EOF
+cat $namelist >> input.nml
+cp $diagtable diag_table
+cp $fieldtable field_table
+cp $execdir/fms.x fms.x
+cp $mppnccombine mppnccombine.$platform
+#--------------------------------------------------------------------------------------------------------
