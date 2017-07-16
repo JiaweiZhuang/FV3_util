@@ -1,0 +1,132 @@
+FV3 technical note (for tracer transport tests)
+Jiawei Zhuang (jiaweizhuang@g.harvard.edu)
+
+===================================================
+1. Pure software engineering part 
+===================================================
+
+ -------------------------------
+  1.1 Source code
+ -------------------------------
+$wget ftp://ftp.gfdl.noaa.gov/pub/projects/Cubed_Sphere/cubed_sphere_public_release.tar.gz
+
+Or visit https://www.gfdl.noaa.gov/cubed-sphere-quickstart/
+
+ -------------------------------
+  1.2 System environment (reside in FV3code/bin/)
+ -------------------------------
+Because GCHP contains FV3, we can use the same environment
+
+See build_script/ for sample bashrc on Odyssey and Pleiades
+
+ -------------------------------
+  1.3 compilation script (reside in FV3code/exp/)
+ -------------------------------
+The original fms_runscript includes both compiling the running the model. We only keep the compilation part.
+
+See build_script/ for compile scripts for Odyssey and Pleiades, notice their minimal difference.
+
+===================================================
+2. Model configuration (reside in FV3code/exp/ and will be copied to rundir)
+===================================================
+
+See model_config/ for basic configurations. We modified the original configuration as follows:
+
+ -------------------------------
+  2.1 namelists or input.nml
+ -------------------------------
+# The basic vertical resolution. By changing npz while keeping npz_rst the same, the restart file will be vertically-regridded online
+npz      = 20,
+npz_rst  = 20,
+
+# Those operators are the strictly-motononic. kord_tr  = 7 is more accurate although has a little chance of creating overshoots.
+# Otherwise, the default options will be (h,k)=(12,8) as shown by logfile.000000.out, which give huge overshoots.
+hord_tr  = -8,
+kord_tr  = 4,
+
+# Uniform spacing in pressure. Only a few values of npz support non-uniform spacing. 
+uniform_vert_spacing = .true.
+
+# Dry-dycore only. No additional forcing. Otherwise we will have crazy temperature.
+do_Held_Suarez = .false.
+adiabatic = .true.
+
+# Print maximum and minimum values of physical fields.
+print_freq = -1,
+
+# Gnomonic-true-equidistant
+grid_type = 0
+
+# Use cold start for the first run and warm start for the continued run
+warm_start = .false.
+
+# Not sure if this has any effect but the original "Conformal" is incorrect.
+grid_name = 'Gnomonic' /
+
+# 13 is the baroclinic instability test that gives us cyclone.
+test_case = 13
+
+ -------------------------------
+  2.2 field_table
+ -------------------------------
+
+We can add arbitrary numbers of passive tracers with any names, for example:
+"TRACER", "atmos_mod", "plume01"/
+"TRACER", "atmos_mod", "plume02"/
+
+ -------------------------------
+  2.3 diag_table
+ -------------------------------
+
+We can output the tracers added in field_table by adding new entries:
+
+#outputfiles
+"tracer_daily",  24,  "hours",  1, "days", "time",
+
+# All available diagnostic fields
+"dynamics", "plume01",    "plume01",   "tracer_daily",  "all", .false.,  "none", 2,
+"dynamics", "plume02",    "plume02",   "tracer_daily",  "all", .false.,  "none", 2,
+
+Removing default entries might contaminate the restart file for the continued run. Not sure why.
+Had better just add entries and not remove old ones.
+
+===================================================
+3. Running and Post-processing
+===================================================
+
+ -------------------------------
+  3.1 Changing the number of cores 
+ -------------------------------
+
+The minimum number of cores is 6. To use 24=6x2x2 cores, set input.nml:
+layout   = 2,2
+io_layout = 2,2 
+
+ -------------------------------
+  3.2 combine outputs into 6 tiles 
+ -------------------------------
+
+Each CPU will only write its own domain. Need to combine small files together if #CPUs > 6 
+
+Run ./combine.sh (copied from build_script/ to rundir)
+
+ -------------------------------
+  3.3 data analysis 
+ -------------------------------
+
+See data_analysis/ for notebooks
+
+For tracer transport we would like to avoid regridding as much as possible, so we would not use fregrid_parallel as in the default fms_runscript
+
+===================================================
+4. Additional notes 
+===================================================
+
+- Warnings (implicit configurations that could lead to confusion)
+
+1) model still runs with uniform_vert_spacing = .false. and npz = undocumented number,
+but that's effectively the same as uniform_vert_spacing = .true.
+
+2) model still uses warm start even if warm_start = .false., as long as input files exist in INPUT/
+
+
