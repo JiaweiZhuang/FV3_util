@@ -1,0 +1,122 @@
+Cubed-Sphere_C48
+0 0 0 0 0 0
+#outputfiles
+"atmos_static", -1,  "hours",  1, "days", "time",
+#"init_cond"   , -1,  "hours",  1, "days", "time",
+"atmos_daily",  24,  "hours",  1, "days", "time",
+#"geopot_ht",    24,  "hours",  1, "days", "time",
+"winds_daily",  24,  "hours",  1, "days", "time",
+"tracer_daily",  24,  "hours",  1, "days", "time",
+
+# All available diagnostic fields
+# Those with a pound sign in the first column will be ignored. 
+# The fields deactivated this way here are those which are not relevant to the Held-Suarez benchmark calculation. 
+"dynamics", "bk"         "bk"         "atmos_static", "all", .false.,  "none", 2,
+"dynamics", "pk"         "pk"         "atmos_static", "all", .false.,  "none", 2,
+"dynamics", "hyam"       "hyam"       "atmos_static", "all", .false.,  "none", 2,
+"dynamics", "hybm"       "hybm"       "atmos_static", "all", .false.,  "none", 2,
+"dynamics", "zsurf"      "zsurf"      "atmos_static", "all", .false.,  "none", 2,
+#"dynamics", "zs"         "zs"         "atmos_static", "all", .false.,  "none", 2,
+"dynamics", "grid_lon",  "grid_lon",  "atmos_static", "all", .false.,  "none", 2,
+"dynamics", "grid_lat",  "grid_lat",  "atmos_static", "all", .false.,  "none", 2,
+"dynamics", "grid_lont", "grid_lont", "atmos_static", "all", .false.,  "none", 2,
+"dynamics", "grid_latt", "grid_latt", "atmos_static", "all", .false.,  "none", 2,
+"dynamics", "area",      "area",      "atmos_static", "all", .false.,  "none", 2,
+#"dynamics", "ze",        "ze",        "atmos_static", "all", .false.,  "none", 2,
+#"dynamics", "oro",       "oro",       "atmos_static", "all", .false.,  "none", 2,
+#"dynamics", "sgh",       "sgh",       "atmos_static", "all", .false.,  "none", 2,
+#"dynamics", "ps_ic",     "pc_ic",     "init_cond",    "all", .false.,  "none", 2,
+#"dynamics", "ua_ic",     "ua_ic",     "init_cond",    "all", .false.,  "none", 2,
+#"dynamics", "va_ic",     "va_ic",     "init_cond",    "all", .false.,  "none", 2,
+#"dynamics", "ppt_ic",    "ppt_ic",    "init_cond",    "all", .false.,  "none", 2,
+"dynamics", "ps",        "ps",        "atmos_daily",  "all", .false.,  "none", 2,
+"dynamics", "temp",      "temp",      "atmos_daily",  "all", .false.,  "none", 2,
+"dynamics", "omega",     "omega",     "atmos_daily",  "all", .false.,  "none", 2,
+"dynamics", "divg",      "divg",      "atmos_daily",  "all", .false.,  "none", 2,
+"dynamics", "vort",      "vort",      "atmos_daily",  "all", .false.,  "none", 2,
+"dynamics", "pv",        "pv",        "atmos_daily",  "all", .false.,  "none", 2,
+#"dynamics", "mq",        "mq",        "atmos_daily",  "all", .false.,  "none", 2,
+"dynamics", "tm",        "tm",        "atmos_daily",  "all", .false.,  "none", 2,
+"dynamics", "slp",       "slp",       "atmos_daily",  "all", .false.,  "none", 2,
+#"dynamics", "cat15",     "cat15",     "atmos_daily",  "all", .false.,  "none", 2,
+#"dynamics", "cat25",     "cat25",     "atmos_daily",  "all", .false.,  "none", 2,
+#"dynamics", "cat35",     "cat35",     "atmos_daily",  "all", .false.,  "none", 2,
+#"dynamics", "cat45",     "cat45",     "atmos_daily",  "all", .false.,  "none", 2,
+#"dynamics", "f15",       "f15",       "atmos_daily",  "all", .false.,  "none", 2,
+#"dynamics", "f25",       "f25",       "atmos_daily",  "all", .false.,  "none", 2,
+#"dynamics", "f35",       "f35",       "atmos_daily",  "all", .false.,  "none", 2,
+#"dynamics", "f45",       "f45",       "atmos_daily",  "all", .false.,  "none", 2,
+"dynamics", "ppt",       "ppt",       "atmos_daily",  "all", .false.,  "none", 2,
+"dynamics", "te",        "te",        "atmos_daily",  "all", .false.,  "none", 2,
+#"dynamics", "h50",       "h50",       "geopot_ht",    "all", .false.,  "none", 2,
+#"dynamics", "h200",      "h200",      "geopot_ht",    "all", .false.,  "none", 2,
+#"dynamics", "h300",      "h300",      "geopot_ht",    "all", .false.,  "none", 2,
+#"dynamics", "h500",      "h500",      "geopot_ht",    "all", .false.,  "none", 2,
+#"dynamics", "h700",      "h700",      "geopot_ht",    "all", .false.,  "none", 2,
+#"dynamics", "h850",      "h850",      "geopot_ht",    "all", .false.,  "none", 2,
+"dynamics", "ucomp",     "ucomp",     "winds_daily",  "all", .false.,  "none", 2,
+"dynamics", "vcomp",     "vcomp",     "winds_daily",  "all", .false.,  "none", 2,
+"dynamics", "vorts",     "vorts",     "winds_daily",  "all", .false.,  "none", 2,
+"dynamics", "us",        "us",        "winds_daily",  "all", .false.,  "none", 2,
+"dynamics", "vs",        "vs",        "winds_daily",  "all", .false.,  "none", 2,
+"dynamics", "vort850",   "vort850",   "winds_daily",  "all", .false.,  "none", 2,
+"dynamics", "u50",       "u50",       "winds_daily",  "all", .false.,  "none", 2,
+"dynamics", "u200",      "u200",      "winds_daily",  "all", .false.,  "none", 2,
+"dynamics", "u500",      "u500",      "winds_daily",  "all", .false.,  "none", 2,
+"dynamics", "u700",      "u700",      "winds_daily",  "all", .false.,  "none", 2,
+"dynamics", "u850",      "u850",      "winds_daily",  "all", .false.,  "none", 2,
+"dynamics", "v50",       "v50",       "winds_daily",  "all", .false.,  "none", 2,
+"dynamics", "v200",      "v200",      "winds_daily",  "all", .false.,  "none", 2,
+"dynamics", "v500",      "v500",      "winds_daily",  "all", .false.,  "none", 2,
+"dynamics", "v700",      "v700",      "winds_daily",  "all", .false.,  "none", 2,
+"dynamics", "v850",      "v850",      "winds_daily",  "all", .false.,  "none", 2,
+"dynamics", "omg200",    "omg200",    "winds_daily",  "all", .false.,  "none", 2,
+"dynamics", "omg500",    "omg500",    "winds_daily",  "all", .false.,  "none", 2,
+"dynamics", "omg850",    "omg850",    "winds_daily",  "all", .false.,  "none", 2,
+"dynamics", "t50",       "t50",       "atmos_daily",  "all", .false.,  "none", 2,
+"dynamics", "t200",      "t200",      "atmos_daily",  "all", .false.,  "none", 2,
+"dynamics", "t500",      "t500",      "atmos_daily",  "all", .false.,  "none", 2,
+"dynamics", "t700",      "t700",      "atmos_daily",  "all", .false.,  "none", 2,
+"dynamics", "t850",      "t850",      "atmos_daily",  "all", .false.,  "none", 2,
+"dynamics", "s200",      "s200",      "atmos_daily",  "all", .false.,  "none", 2,
+#"dynamics", "sl12",      "sl12",      "atmos_daily",  "all", .false.,  "none", 2,
+#"dynamics", "sl13",      "sl13",      "atmos_daily",  "all", .false.,  "none", 2,
+"dynamics", "plume01",    "plume01",   "tracer_daily",  "all", .false.,  "none", 2,
+"dynamics", "plume02",    "plume02",   "tracer_daily",  "all", .false.,  "none", 2,
+"dynamics", "plume03",    "plume03",   "tracer_daily",  "all", .false.,  "none", 2,
+"dynamics", "plume04",    "plume04",   "tracer_daily",  "all", .false.,  "none", 2,
+"dynamics", "plume05",    "plume05",   "tracer_daily",  "all", .false.,  "none", 2,
+"dynamics", "plume06",    "plume06",   "tracer_daily",  "all", .false.,  "none", 2,
+"dynamics", "plume07",    "plume07",   "tracer_daily",  "all", .false.,  "none", 2,
+"dynamics", "plume08",    "plume08",   "tracer_daily",  "all", .false.,  "none", 2,
+
+#=============================================================================================
+#
+#  FORMATS FOR FILE ENTRIES (not all input values are used)
+#  ------------------------
+#
+#"file_name", output_freq, "output_units", format, "time_units", "long_name"
+#
+#
+#   output_freq:  > 0  output frequency in "output_units"
+#                 = 0  output frequency every time step
+#                 =-1  output frequency at end of run
+#
+#   output_units = units used for output frequency
+#                  (years, months, days, minutes, hours, seconds)
+#
+#   time_units   = units used to label the time axis
+#                  (days, minutes, hours, seconds)
+#
+#
+#  FORMAT FOR FIELD ENTRIES (not all input values are used)
+#  ------------------------
+#
+#"module_name", "field_name", "output_name", "file_name", "time_sampling", time_avg, "other_opts", packing
+#
+#   time_avg = .true. or .false.
+#
+#   packing  = 1  double precision
+#            = 2  float
+#            = 4  packed 16-bit integers
+#            = 8  packed 1-byte (not tested?)

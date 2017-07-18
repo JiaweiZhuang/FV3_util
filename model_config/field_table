@@ -1,0 +1,12 @@
+"TRACER", "atmos_mod", "sphum"/
+"TRACER", "atmos_mod", "liq_wat"/
+"TRACER", "atmos_mod", "ice_wat"/
+"TRACER", "atmos_mod", "cld_amt"/
+"TRACER", "atmos_mod", "plume01"/
+"TRACER", "atmos_mod", "plume02"/
+"TRACER", "atmos_mod", "plume03"/
+"TRACER", "atmos_mod", "plume04"/
+"TRACER", "atmos_mod", "plume05"/
+"TRACER", "atmos_mod", "plume06"/
+"TRACER", "atmos_mod", "plume07"/
+"TRACER", "atmos_mod", "plume08"/
