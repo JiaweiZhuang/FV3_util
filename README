@@ -44,6 +44,10 @@ npz_rst  = 20,
 hord_tr  = -8,
 kord_tr  = 4,
 
+# Fix dynamics timestep
+# Let q_split (tracer time step) be determined dynamically
+n_split = 8,
+
 # Uniform spacing in pressure. Only a few values of npz support non-uniform spacing. 
 uniform_vert_spacing = .true.
 

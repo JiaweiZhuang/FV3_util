@@ -16,6 +16,7 @@
      npz_rst  = 20,
      hord_tr  = -8,
      kord_tr  = 4,
+     n_split = 8,
      uniform_vert_spacing = .true.,
      ntiles   = 6,
      do_Held_Suarez = .false.
