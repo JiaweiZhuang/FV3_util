@@ -1,0 +1,9 @@
+#!/bin/csh -f
+
+set mppnccombine = $HOME/FV3/CodeDir/bin/mppnccombine.Pleiades
+
+# combine netcdf files
+foreach ncfile (`/bin/ls *.nc.0000`)
+  $mppnccombine $ncfile:r
+  if ($status == 0) rm -f $ncfile:r.????
+end
