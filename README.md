@@ -1,5 +1,5 @@
 Code for the paper "The importance of vertical resolution in the free troposphere for modeling intercontinental plumes" submitted to ACP
-============
+--------
 
 Authors
 --------
@@ -14,6 +14,7 @@ Might need to be adjusted for your system environment.
 
 Python notebook for data analysis
 --------
-See the folder [data_analysis](./data_analysis)
-Some data needed for the code are huge (~TB) and can not be hosted here.
+See the folder [data_analysis/](./data_analysis)
+
+Some data needed for the code are huge (~TB) and cannot be hosted here.
 They are available upon request, or can be reproduced by rerunning the model.
