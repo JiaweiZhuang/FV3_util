@@ -1,5 +1,6 @@
 Code for the paper "The importance of vertical resolution in the free troposphere for modeling intercontinental plumes" submitted to ACP
 --------
+[![DOI](https://zenodo.org/badge/95622791.svg)](https://zenodo.org/badge/latestdoi/95622791)
 
 Authors
 --------
