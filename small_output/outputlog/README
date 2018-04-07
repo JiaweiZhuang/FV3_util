@@ -1,0 +1,7 @@
+This folder contains log files generated from GFDL-FV3 simulations at all resolutions used in the paper.
+
+*_spinup.log are for 8-day initialization.
+*_std.log are actual plume transport tests.
+
+These logs record the time series of plume maximum/minimum mixing ratios,
+as well as the simulation time and CPU count ("PEs").
