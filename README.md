@@ -17,5 +17,4 @@ Python notebook for data analysis
 --------
 See the folder [data_analysis/](./data_analysis)
 
-Some data needed for the code are huge (~TB) and cannot be hosted here.
-They are available upon request, or can be reproduced by rerunning the model.
+In general, simple line plots (mixing ratio, entropy, profile) can be reproduced by simply running the notebook. Plots on map require TBs of data that cannot be hosted here. They are available upon request, or can be reproduced by rerunning the model.

@@ -5,3 +5,5 @@ This folder contains log files generated from GFDL-FV3 simulations at all resolu
 
 These logs record the time series of plume maximum/minimum mixing ratios,
 as well as the simulation time and CPU count ("PEs").
+
+timing_summary.ipynb extracts the timing info and print as a table.
